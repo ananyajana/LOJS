@@ -27,7 +27,8 @@ public:
             if(!root){
                 root = S.top();
                 S.pop();
-                temp = S.top();
+				if(!S.empty())
+					temp = S.top();
                 if(root->right && temp == root->right){
                     S.pop();
                     S.push(root);
