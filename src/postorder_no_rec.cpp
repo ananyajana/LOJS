@@ -17,32 +17,27 @@ public:
         }
         std::stack<TreeNode*> S;
         TreeNode* temp;
-        do{
+        while(!S.empty()){
             if(root){
-                S.push(root);
                 if(root->right)
                     S.push(root->right);
+                S.push(root);    
                 root = root->left;
             }
             if(!root){
                 root = S.top();
                 S.pop();
-                if(S.empty()){
-                    result.push_back(root->val);
-                    break;
-                }
                 temp = S.top();
-                if(!root->right ||(temp && temp != root->right)){
-                    result.push_back(root->val);
-                    root = NULL;
-                }
-                else{
+                if(root->right && temp == root->right){
+                    S.pop();
                     S.push(root);
                     root = root->right;
                 }
-                
-                    
+                else{
+                    result.push_back(root->val);
+                    root = NULL;
+                }
             }
-        }while(!S.empty() || root);
+        }
     }
 };
